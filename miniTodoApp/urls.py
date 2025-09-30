@@ -16,16 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.http import HttpRequest
+# from django.http import HttpRequest
+from django.http import HttpResponse
 
 def home(request):
-    return HttpRequest('Home Page')
+    return HttpResponse('Home Page')
 
 def achievements(request):
-    return HttpRequest('Achievements')
+    return HttpResponse('Achievements')
 
 def goals(request):
-    return HttpRequest('Goals')
+    return HttpResponse('Goals')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
