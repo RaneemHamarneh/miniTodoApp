@@ -5,5 +5,5 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home),
-    path('/tasks', views.tasks),
+    path('mtable/', views.tasks),
 ]

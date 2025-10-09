@@ -1,8 +1,11 @@
-from django.http import HttpResponse
+# from django.http import HttpResponse
+from django.shortcuts import render
 
-def home(Request):
-    return HttpResponse("Hello World...\n Our Home Page\n I'm Home ")
+def home(request):
+    # return HttpResponse("Hello World...\n Our Home Page\n I'm Home ")
+    return render(request, 'home.html' )
 
 
-def tasks(Request):
-    return HttpResponse("Tasks ... page")
+def tasks(request):
+    # return HttpResponse("Tasks ... page")
+    return render(request, 'mtable.html')
