@@ -1,4 +1,37 @@
-<!DOCTYPE html>
+{% extends 'layout.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+        <section class="container container--top">
+            <h1>
+                GASs
+            </h1>
+            <h2> Goals | Achievemnets | Sucesses</h2>
+            <p>Take things step by step, and trust that everything will work out well in the future.</p>
+            <p>to create a tasks list click on the button</p>
+            <div class="row">
+                <button class="lime-sun-btn" type="button">
+                    <a href="/mtable">make a Table</a>
+                </button>
+            </div>
+        </section>
+        <section class="container">
+        <h2>Achievemnets</h2>
+        <p>Second row, left side content.</p>
+        </section>
+
+        <!-- BOTTOM RIGHT container -->
+        <section class="container">
+        <h2>Goals</h2>
+        <p>Second row, right side content.</p>
+        </section>
+
+{% endblock %}
+
+{% comment %} <!DOCTYPE html>
 {% load static %}
 <html lang="en">
 
@@ -6,22 +39,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home: GASS</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/main.js' %}" defer></script>
 </head>
 
 <body>
-    <div>
-        <h1>
-            GASs
-        </h1>
-        <h2> Goals | Achievemnets | Sucesses</h2>
-        <p>Take things step by step, and trust that everything will work out well in the future.</p>
-        <p>to create a tasks list click on the button
-            <button>
-                <a href="/mtable">make a Table</a>
-            </button>
-        </p>
-    </div>
+    <main class="layout">
+        <section class="container container--top">
+            <h1>
+                GASs
+            </h1>
+            <h2> Goals | Achievemnets | Sucesses</h2>
+            <p>Take things step by step, and trust that everything will work out well in the future.</p>
+            <p>to create a tasks list click on the button</p>
+            <div class="row">
+                <button class="lime-sun-btn" type="button">
+                    <a href="/mtable">make a Table</a>
+                </button>
+            </div>
+        </section>
+        <section class="container">
+        <h2>Achievemnets</h2>
+        <p>Second row, left side content.</p>
+        </section>
+
+        <!-- BOTTOM RIGHT container -->
+        <section class="container">
+        <h2>Goals</h2>
+        <p>Second row, right side content.</p>
+        </section>
+    </main>
 </body>
 
-</html>
+</html> {% endcomment %}

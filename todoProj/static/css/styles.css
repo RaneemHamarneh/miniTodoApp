@@ -1,0 +1,254 @@
+/* ========== Theme Vars ========== */
+:root {
+    --bg1: #0b0f14;
+    /* deep charcoal */
+    --bg2: #0a1a1a;
+    /* deep teal tint */
+    --card-bg: rgba(255, 255, 255, .06);
+    --card-border: rgba(255, 255, 255, .12);
+    --text: #e9eef3;
+    --muted: #a9b3bd;
+
+    --lime: limegreen;
+    --sun: #FFD300;
+    --lime2: #9EFF00;
+    --sun2: #FFEA00;
+}
+
+/* ========== Base Reset ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+html,
+body {
+    height: 100%
+}
+
+/* ========== Page ========== */
+body {
+    display: grid;
+    place-items: center;
+    background:
+        radial-gradient(1200px 800px at 80% -20%, #1b2b24 0%, transparent 60%),
+        radial-gradient(1000px 700px at -10% 110%, #1a2030 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    line-height: 1.3;
+    padding: 24px;
+}
+
+/* subtle noise */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 0 0 0 0.05 0.06 0.05 0'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+    opacity: .05;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+}
+
+/* ========== Card ========== */
+.container {
+    width: min(880px, 92vw);
+    background: var(--card-bg);
+    border-radius: 24px;
+
+    /* lime-green shining border */
+    border: 2px solid limegreen;
+    box-shadow:
+        0 0 15px rgba(50, 205, 50, .6),
+        /* outer lime glow */
+        inset 0 0 15px rgba(50, 205, 50, .3);
+    /* inner glow */
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 40px 28px;
+    text-align: center;
+    transition: box-shadow .3s ease, border-color .3s ease;
+}
+
+.container:hover {
+    border-color: var(--lime2);
+    box-shadow:
+        0 0 25px rgba(158, 255, 0, .8),
+        inset 0 0 20px rgba(158, 255, 0, .5);
+}
+
+/* ========== Typography ========== */
+h1 {
+    font-size: clamp(28px, 5vw, 48px);
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: .2px;
+    margin-bottom: 12px;
+    background: linear-gradient(90deg, var(--sun), var(--lime));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+h2 {
+    font-size: clamp(18px, 2.5vw, 22px);
+    color: #cbc03c;
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: .2px;
+    margin-bottom: 24px;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+
+
+p {
+    font-size: clamp(14px, 2vw, 18px);
+    color: var(--text);
+    opacity: .9;
+    margin: 0 auto 28px;
+    max-width: 60ch;
+}
+
+/* ========== Button ========== */
+button.lime-sun-btn {
+    background: linear-gradient(135deg, var(--lime), var(--sun));
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    font: 600 16px/1 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(255, 211, 0, .18), 0 2px 10px rgba(0, 255, 0, .18);
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+button.lime-sun-btn:hover {
+    background: linear-gradient(135deg, var(--lime2), var(--sun2));
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(255, 211, 0, .28), 0 6px 18px rgba(0, 255, 0, .22);
+}
+
+button.lime-sun-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 16px rgba(255, 211, 0, .24), 0 2px 10px rgba(0, 255, 0, .18);
+}
+
+button.lime-sun-btn:focus-visible {
+    outline: 2px solid var(--sun2);
+    outline-offset: 2px;
+}
+
+/* ========== Small helpers ========== */
+.row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap
+}
+
+.spacer {
+    height: 8px
+}
+
+/* ========== Layout (1 top centered, 2 under in same row) ========== */
+.layout {
+    width: min(1100px, 94vw);
+    display: grid;
+    gap: 18px;
+    grid-template-columns: 1fr;
+    /* mobile: stack */
+    margin-inline: auto;
+    /* center the grid block */
+}
+
+/* top card centered & comfy width */
+.container--top {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: min(880px, 100%);
+}
+
+@media (min-width:768px) {
+    .layout {
+        grid-template-columns: 1fr 1fr;
+        /* two columns on desktop */
+        align-items: start;
+    }
+
+    /* bottom two fill their columns */
+    .layout>.container:not(.container--top) {
+        width: 100%;
+        justify-self: stretch;
+    }
+}
+
+/* === Simple Navbar === */
+/* === Simple Navbar (fixed to top) === */
+.simple-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    /* center inner content with a max width */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    width: 100%;
+    padding: 10px 14px;
+
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--card-border);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1000;
+    /* stay above cards */
+}
+
+/* inner container to keep your site width */
+.simple-nav__inner {
+    width: min(1100px, 94vw);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.simple-nav a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    transition: background .2s ease, color .2s ease;
+}
+
+.simple-nav a:hover,
+.simple-nav a:focus-visible {
+    background: linear-gradient(135deg, var(--sun), var(--lime));
+    color: #0b0f14;
+    outline: none;
+}
+
+/* links row */
+.simple-nav__links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* prevent the nav from covering your first content */
+body {
+    padding-top: 60px;
+}
+
+/* adjust if your nav height changes */
