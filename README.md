@@ -2,7 +2,7 @@
 Django (python)
 the structure of the project 
 
-
+```mermaid
 graph TD
     A[🚀 User Visits App] --> B[Django Core URL Dispatcher];
     B --> C{🏗️ Two Main Sections};
@@ -12,7 +12,8 @@ graph TD
     F -- Create Broad Goals --> G[✨ Create Goals];
     F -- Break into Steps --> H[✅ Create Tasks];
     E --> I[🎉 Celebrate when you finish Tasks];
-    
+    C-->D;
+```
     style A fill:#e1f5fe
     style D fill:#fff3e0
     style E fill:#e8f5e8
