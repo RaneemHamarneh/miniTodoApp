@@ -18,7 +18,6 @@
 /* ========== Base Reset ========== */
 * {
     margin: 0;
-    padding: 0;
     box-sizing: border-box
 }
 
@@ -29,7 +28,6 @@ body {
 
 /* ========== Page ========== */
 body {
-    display: grid;
     place-items: center;
     background:
         radial-gradient(1200px 800px at 80% -20%, #1b2b24 0%, transparent 60%),
