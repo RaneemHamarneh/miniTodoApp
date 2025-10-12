@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Goal: {{ goal.title }}
+{% endblock %}
+
+{% block content %}
+    <h1>🎯 {{ goal.title|upper }}</h1>
+    
+    <!-- Goal information -->
+    <div style="background: #f5f5f5; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
+        <p><strong>Status:</strong> {{ goal.get_status_display }}</p>
+        <p><strong>Description:</strong> {{ goal.description|linebreaks }}</p>
+        
+        {% if goal.deadline %}
+            <p><strong>Deadline:</strong> 
+                <span style="{% if goal.deadline < today %}color: red; font-weight: bold;{% endif %}">
+                    {{ goal.deadline|date:"F j, Y" }}
+                </span>
+            </p>
+        {% endif %}
+        
+        <p><strong>Progress:</strong> {{ completed_tasks }} of {{ total_tasks }} tasks completed 
+           ({{ completed_tasks|floatformat:0 }}%)</p>
+    </div>
+
+    <h2>📋 Tasks ({{ tasks|length }})</h2>
+    
+    {% for task in tasks %}
+        <div style="border-left: 4px solid {% if task.is_done %}green{% else %}orange{% endif %}; 
+                    padding: 10px; margin: 5px 0; background: white;">
+            
+            <h3 style="margin-top: 0;">
+                <a href="{% url 'goals:task_detail' task.id %}">
+                    {{ task.title }}
+                </a>
+                {% if task.is_done %} ✅{% endif %}
+            </h3>
+            
+            <p style="{% if task.is_done %}text-decoration: line-through; color: green;{% else %}font-weight: bold;{% endif %}">
+                {{ task.description|default:"No description" }}
+            </p>
+            
+            {% if task.due_date %}
+                <p><strong>Due:</strong> 
+                    <span style="{% if task.due_date < today and not task.is_done %}color: red; font-weight: bold;{% endif %}">
+                        {{ task.due_date|date:"M d, Y" }}
+                        {% if task.due_date < today and not task.is_done %}
+                            (OVERDUE!)
+                        {% endif %}
+                    </span>
+                </p>
+            {% endif %}
+            
+            <small style="color: #666;">
+                Created: {{ task.created_at|date:"M d, Y" }} | 
+                Updated: {{ task.updated_at|timesince }} ago
+            </small>
+        </div>
+    {% empty %}
+        <p>No tasks for this goal yet.</p>
+    {% endfor %}
+    
+    <br>
+    <a href="{% url 'goals:goal_list' %}">← Back to All Goals</a>
+{% endblock %}

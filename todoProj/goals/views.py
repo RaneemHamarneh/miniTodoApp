@@ -1,25 +1,51 @@
-from django.shortcuts import render,  get_object_or_404
-from django.http import HttpResponse
-from .models import Task 
+from django.shortcuts import render, get_object_or_404
+from django.utils import timezone
+from .models import Goal, Task
 
-# Create your views here.
-# A simple function-based view to display all tasks:cite[2]
+def goal_list(request):
+    """Display all goals with their tasks"""
+    goals = Goal.objects.all()
+    
+    context = {
+        'goals': goals,
+        'today': timezone.now().date(),
+        'total_goals': goals.count(),
+        'completed_goals': Goal.objects.filter(status='done').count(),
+    }
+    return render(request, 'goals/goals_list.html', context)
+
+def goal_detail(request, goal_id):
+    """Display single goal with all its tasks"""
+    goal = get_object_or_404(Goal, id=goal_id)
+    tasks = goal.tasks.all()  # Using related_name="tasks"
+    
+    context = {
+        'goal': goal,
+        'tasks': tasks,
+        'completed_tasks': tasks.filter(is_done=True).count(),
+        'total_tasks': tasks.count(),
+        'today': timezone.now().date(),
+    }
+    return render(request, 'goals/goal_detail.html', context)
+
 def task_list(request):
-    """
-    View to display a list of all tasks.
-    """
-    # Get all tasks from the database
-    all_tasks = Task.objects.all()
-    # Render the 'task_list.html' template, passing the tasks as context
-    return render(request, 'goals/goals_list.html', {'task_list': all_tasks})
+    """Display all tasks across all goals"""
+    tasks = Task.objects.all()
+    
+    context = {
+        'tasks': tasks,
+        'completed_tasks': tasks.filter(is_done=True),
+        'pending_tasks': tasks.filter(is_done=False),
+        'today': timezone.now().date(),
+    }
+    return render(request, 'goals/task_list.html', context)
 
-# A simple function-based view to display the details of a single task:cite[2]
 def task_detail(request, task_id):
-    """
-    View to display the details of a single task.
-    The 'task_id' is captured from the URL.
-    """
-    # Get the task with the specific id, or return a 404 error if not found:cite[2]
-    task = get_object_or_404(Task, pk=task_id)
-    # Render the 'task_detail.html' template, passing the single task as context
-    return render(request, 'goals/task_list.html', {'task': task})
+    """Display single task details"""
+    task = get_object_or_404(Task, id=task_id)
+    
+    context = {
+        'task': task,
+        'today': timezone.now().date(),
+    }
+    return render(request, 'goals/task_detail.html', context)

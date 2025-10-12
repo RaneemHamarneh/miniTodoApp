@@ -1,21 +1,82 @@
 {% extends 'layout.html' %}
 
 {% block title %}
-    Goals Lists
+    My Goals
 {% endblock %}
 
 {% block content %}
-    <h1> GASs </h1>
-    <h2>Goals Lists</h2>
-    <ul>
-        {% for task in tasks %}
-            <li>
-                <a href="{% url 'goals:task_detail' task.id %}">
-                    {{ task.title }}
+    <h1> Goals Lists </h1>
+    <h2> Total Goals: ({{ total_goals }})</h2>
+    <p>
+        Completed: <strong>{{ completed_goals }}</strong> | 
+        In Progress: <strong>{{ goals|length|add:"-"|add:completed_goals }}</strong>
+    </p>
+    {% for goal in goals %}
+        <div class="goal-card">
+            <h2>
+                <a href="{% url 'goals:goal_detail' goal.id %}">
+                    {{ goal.title|title }}
                 </a>
-            </li>
-        {% empty %}
-            <li>No tasks yet.</li>
-        {% endfor %}
-    </ul>
+            </h2>
+            
+            <!-- Status with color coding -->
+            <p class="status-{{ goal.status }}">
+                <strong>Status:</strong> 
+                {{ goal.get_status_display|upper }}
+            </p>
+            
+            <!-- Description with filter -->
+            <p><strong>Description:</strong> 
+               {{ goal.description|default:"No description"|truncatewords:15 }}
+            </p>
+            
+            <!-- Deadline with conditional formatting -->
+            <p>
+                <strong>Deadline:</strong>
+                {% if goal.deadline %}
+                    <span class="{% if goal.deadline < today %}overdue{% endif %}">
+                        {{ goal.deadline|date:"F j, Y" }}
+                        {% if goal.deadline < today %}
+                            (OVERDUE!)
+                        {% endif %}
+                    </span>
+                {% else %}
+                    No deadline
+                {% endif %}
+            </p>
+            
+            <!-- Task count for this goal -->
+            <p>
+                <strong>Tasks:</strong> 
+                {{ goal.tasks.count }} total
+            </p>
+            
+            <!-- Tasks list for this goal -->
+            <ul>
+                {% for task in goal.tasks.all %}
+                    <li>
+                        <a href="{% url 'goals:task_detail' task.id %}">
+                            {{ task.title }}
+                        </a>
+                        {% if task.is_done %} ✅{% endif %}
+                        {% if task.due_date %}
+                            - Due: <span class="{% if task.due_date < today and not task.is_done %}overdue{% endif %}">
+                                {{ task.due_date|date:"M d, Y" }}
+                            </span>
+                        {% endif %}
+                    </li>
+                {% empty %}
+                    <li>No tasks yet for this goal.</li>
+                {% endfor %}
+            </ul>
+            
+            <!-- Created/updated dates -->
+            <small>
+                Created: {{ goal.created_at|date:"M d, Y" }} |
+                Updated: {{ goal.updated_at|timesince }} ago
+            </small>
+        </div>
+    {% empty %}
+        <p>No goals yet. Create your first goal!</p>
+    {% endfor %}
 {% endblock %}
