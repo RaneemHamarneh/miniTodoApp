@@ -7,4 +7,15 @@
 {% block content %}
     <h1> GASs </h1>
     <h2>Goals Lists</h2>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                <a href="{% url 'goals:task_detail' task.id %}">
+                    {{ task.title }}
+                </a>
+            </li>
+        {% empty %}
+            <li>No tasks yet.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

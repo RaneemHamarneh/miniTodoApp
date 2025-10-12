@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Goals Lists
+{% endblock %}
+
+{% block content %}
+    <h1>Task: {{ task.title }}</h1>
+    <p>Description: {{ task.description }}</p>
+    <p>Status: {% if task.completed %}Completed{% else %}Pending{% endif %}</p>
+    <a href="{% url 'goals:task_list' %}">Back to all tasks</a>
+{% endblock %}
