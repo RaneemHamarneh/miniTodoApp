@@ -6,5 +6,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home),
     path('mtable/', views.tasks),
-    path('goals', include('goals.urls'))
+    path('goals', include('goals.urls')),
+    path('tasks', include('goals.urls')),
 ]
