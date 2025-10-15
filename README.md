@@ -13,13 +13,15 @@ graph TD
     F -- Break into Steps --> H[✅ Create Tasks];
     E --> I[🎉 Celebrate when you finish Tasks];
     C-->D;
-```
+
     style A fill:#e1f5fe
     style D fill:#fff3e0
     style E fill:#e8f5e8
     style G fill:#f3e5f5
     style H fill:#ffebee
     style I fill:#e1f5fe
+```
+
 
 in Futer I am gonna create this structure ::
 goals_achievements_app/
