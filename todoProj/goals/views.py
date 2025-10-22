@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from .models import Goal, Task
 
+
+
 def goal_list(request):
     """Display all goals with their tasks"""
     goals = Goal.objects.all()

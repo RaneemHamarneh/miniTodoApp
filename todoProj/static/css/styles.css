@@ -8,11 +8,12 @@
     --card-border: rgba(255, 255, 255, .12);
     --text: #e9eef3;
     --muted: #a9b3bd;
-
     --lime: limegreen;
     --sun: #FFD300;
     --lime2: #9EFF00;
     --sun2: #FFEA00;
+    --nav-h: 60px;
+    /* fixed navbar height */
 }
 
 /* ========== Base Reset ========== */
@@ -28,6 +29,8 @@ body {
 
 /* ========== Page ========== */
 body {
+    display: grid;
+    /* needed for place-items */
     place-items: center;
     background:
         radial-gradient(1200px 800px at 80% -20%, #1b2b24 0%, transparent 60%),
@@ -37,6 +40,8 @@ body {
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     line-height: 1.3;
     padding: 24px;
+    padding-top: calc(var(--nav-h) + 24px);
+    /* prevent nav overlap */
 }
 
 /* subtle noise */
@@ -55,15 +60,10 @@ body::after {
     width: min(880px, 92vw);
     background: var(--card-bg);
     border-radius: 24px;
-
-    /* lime-green shining border */
-    border: 2px solid limegreen;
+    border: 2px solid var(--lime);
     box-shadow:
         0 0 15px rgba(50, 205, 50, .6),
-        /* outer lime glow */
         inset 0 0 15px rgba(50, 205, 50, .3);
-    /* inner glow */
-
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 40px 28px;
@@ -98,11 +98,7 @@ h2 {
     font-weight: 600;
     letter-spacing: .2px;
     margin-bottom: 24px;
-    -webkit-background-clip: text;
-    background-clip: text;
 }
-
-
 
 p {
     font-size: clamp(14px, 2vw, 18px);
@@ -115,7 +111,7 @@ p {
 /* ========== Button ========== */
 button.lime-sun-btn {
     background: linear-gradient(135deg, var(--lime), var(--sun));
-    color: #fff;
+    color: #0b0f14;
     border: none;
     padding: 12px 28px;
     font: 600 16px/1 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
@@ -138,19 +134,7 @@ button.lime-sun-btn:active {
 
 button.lime-sun-btn:focus-visible {
     outline: 2px solid var(--sun2);
-    outline-offset: 2px;
-}
-
-/* ========== Small helpers ========== */
-.row {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap
-}
-
-.spacer {
-    height: 8px
+    outline-offset: 2px
 }
 
 /* ========== Layout (1 top centered, 2 under in same row) ========== */
@@ -159,58 +143,44 @@ button.lime-sun-btn:focus-visible {
     display: grid;
     gap: 18px;
     grid-template-columns: 1fr;
-    /* mobile: stack */
     margin-inline: auto;
-    /* center the grid block */
 }
 
-/* top card centered & comfy width */
 .container--top {
     grid-column: 1 / -1;
     justify-self: center;
-    width: min(880px, 100%);
+    width: min(880px, 100%)
 }
 
 @media (min-width:768px) {
     .layout {
         grid-template-columns: 1fr 1fr;
-        /* two columns on desktop */
-        align-items: start;
+        align-items: start
     }
 
-    /* bottom two fill their columns */
     .layout>.container:not(.container--top) {
         width: 100%;
-        justify-self: stretch;
+        justify-self: stretch
     }
 }
 
-/* === Simple Navbar === */
-/* === Simple Navbar (fixed to top) === */
+/* ========== Simple Navbar (fixed) ========== */
 .simple-nav {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-
-    /* center inner content with a max width */
+    height: var(--nav-h);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-
-    width: 100%;
-    padding: 10px 14px;
-
+    justify-content: center;
     background: var(--card-bg);
     border-bottom: 1px solid var(--card-border);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     z-index: 1000;
-    /* stay above cards */
 }
 
-/* inner container to keep your site width */
 .simple-nav__inner {
     width: min(1100px, 94vw);
     margin: 0 auto;
@@ -237,16 +207,8 @@ button.lime-sun-btn:focus-visible {
     outline: none;
 }
 
-/* links row */
 .simple-nav__links {
     display: flex;
     gap: 10px;
-    flex-wrap: wrap;
+    flex-wrap: wrap
 }
-
-/* prevent the nav from covering your first content */
-body {
-    padding-top: 60px;
-}
-
-/* adjust if your nav height changes */

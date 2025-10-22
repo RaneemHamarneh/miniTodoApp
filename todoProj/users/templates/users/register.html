@@ -1,0 +1,14 @@
+{%extends 'layout.html'%}
+
+{% block title %}
+    Register a new User
+{% endblock %}
+
+{% block content %}
+    <h1> Register a new User </h1>
+    <form class="container--top" action="{% url 'users:register' %}" method="post"> 
+        {% csrf_token %}
+        {{ form }}
+        <button class="lime-sun-btn" type="submit"> Submit </button>
+    </form>
+{% endblock %}

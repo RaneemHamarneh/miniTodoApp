@@ -18,8 +18,9 @@
         <a href="/"><strong>GASs</strong></a>
             <div class="simple-nav__links">
                 <a href="/">Home</a>
+                <a href="{% url 'users:register' %}">Sign-in </a>
                 <a href="/mtable">Tasks</a>
-                <a href="/goals">Goals</a>
+                <a href="{% url 'goals:list' %}">Goals</a>
                 <a href="#">Contact</a>
             </div>
         </div>
