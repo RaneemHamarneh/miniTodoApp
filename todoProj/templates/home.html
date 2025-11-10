@@ -14,21 +14,30 @@ Home
             <p>to create a tasks list click on the button</p>
             <div class="row">
                 <button class="lime-sun-btn" type="button">
-                    <a href="/tasks">Tasks</a>
+                    <a href="/goals">Check Ur Goals</a>
                 </button>
             </div>
         </section>
+        
         <section class="container">
-        <h2>Achievemnets</h2>
-        <p>Achievements you've already achieved🎉🎉🎉</p>
-        </section>
-
+            <h2>Achievemnets</h2>
+             <button class="lime-sun-btn" type="button">
+                <a href='{% url 'goals:achievements'%}'>
+                       See Ur Progress
+                </a>          
+           </button>
+        </section> 
+         
         <!-- BOTTOM RIGHT container -->
         <section class="container">
             <a href='/goals'>
-                <h2>Goals</h2>
-                <p>Create Goals.✨</p>
+                <h2>Goals</h2> 
             </a>
+            <button class="lime-sun-btn" type="button">
+                <a href='{% url 'goals:create_goal'%}'>
+                    Create Goals✨
+                </a>
+            </button>
         </section>
 
 {% endblock %}

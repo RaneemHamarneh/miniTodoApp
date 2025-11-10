@@ -8,7 +8,7 @@
     <h1> Register a new User </h1>
     <form class="container--top" action="{% url 'users:register' %}" method="post"> 
         {% csrf_token %}
-        {{ form }}
+        {{ form.as_p }}
         <button class="lime-sun-btn" type="submit"> Submit </button>
     </form>
 {% endblock %}

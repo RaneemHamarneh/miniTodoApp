@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<section class="container container--top">
+  <h2>Click here and check Your Successes </h2>
+      <button class="lime-sun-btn" type="button">
+        <a href='{% url 'goals:achievements'%}'>
+                Achievemnets
+        </a>          
+    </button>
+</section> 
+<div class="container ">
+  <h2>{{ title }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="lime-sun-btn">
+      {% if view.object %}Update{% else %}Create{% endif %}
+    </button>
+    <button class="lime-sun-btn" type="button" >
+      <a href="javascript:history.back()" class="lime-sun-btn" >Cancel</a>
+    </button>
+<!-- 🔹 Put this <style> block OUTSIDE the <button> -->
+<style>
+  .btn-delete {
+    display: flex;
+    justify-content: center;
+    background: none;
+    border: 1px solid #FFB800;
+    color: #FFB800;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+
+  .btn-delete:hover {
+    background-color: #FFB800;
+    color: black;
+    transform: translateY(-2px);
+  }
+</style>
+
+<!-- delete 🗑️ Button -->
+    <button type="submit" name="delete" value="1"
+        class="btn-delete"
+        onclick="return confirm('Are you sure you want to delete this goal? This action cannot be undone.');">
+       <span>  🗑️_Delete</span>
+    </button>
+
+  </form>
+</div>
+
+{% endblock %}

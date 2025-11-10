@@ -17,11 +17,20 @@
        <div class="simple-nav__inner"> 
         <a href="/"><strong>GASs</strong></a>
             <div class="simple-nav__links">
-                <a href="/">Home</a>
-                <a href="{% url 'users:register' %}">Sign-in </a>
-                <a href="/mtable">Tasks</a>
-                <a href="{% url 'goals:list' %}">Goals</a>
-                <a href="#">Contact</a>
+                <a style="display: flex; align-items:center;" href="/">Home</a>
+                {% if user.is_authenticated %}
+                    <a style="display: flex; align-items:center;" href="{% url 'goals:list' %}">Goals</a>
+                    <form action="{% url 'users:logout'%}" method="post"> 
+                        {% csrf_token %} 
+                        <button class="lime-sun-btn" aria-label="User Logout" title="User Logout">Logout</button>
+                    </form>
+                    
+                    {% comment %} <a href="#">Contact</a> {% endcomment %}
+                {% else %}
+                    <a   href="{% url 'users:register' %}">Sign-up </a> 
+                    <a href="{% url 'users:login' %}">login </a> 
+                {% endif%}
+            
             </div>
         </div>
     </nav>

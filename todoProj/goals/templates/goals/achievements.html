@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container ">
+  <h2>Your Achievements</h2>
+  <p>Date: {{ today }}</p>
+
+  <ul>
+    <li>Total Goals: {{ total_goals }}</li>
+    <li>Completed Goals: {{ completed_goals }}</li>
+    <li>Total Tasks: {{ total_tasks }}</li>
+    <li>Completed Tasks: {{ completed_tasks }}</li>
+  </ul>
+</div>
+{% endblock %}

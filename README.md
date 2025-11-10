@@ -11,8 +11,7 @@ graph TD
     D --> F{📝 How to organize your goals?};
     F -- Create Broad Goals --> G[✨ Create Goals];
     F -- Break into Steps --> H[✅ Create Tasks];
-    E --> I[🎉 Celebrate when you finish Tasks];
-    C-->D;
+    E --> I[🎉 Celebrate when you finish Goals];
 
     style A fill:#e1f5fe
     style D fill:#fff3e0
