@@ -181,11 +181,11 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs["user"] = self.request.user
-        kwargs["goal"] = self.get_goal()   # ← مهم: مرري الهدف للفورم
+        kwargs["goal"] = self.get_goal()   # 
         return kwargs
 
     def form_valid(self, form):
-        # لا تلمس form.instance.goal هنا؛ الفورم ضبطها في __init__/save
+        # 
         return super().form_valid(form)
 
     def get_success_url(self):
